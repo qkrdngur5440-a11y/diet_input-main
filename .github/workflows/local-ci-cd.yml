@@ -63,4 +63,4 @@ jobs:
 
       - name: Show services
         shell: powershell
-        run: kubectl get svc -n book-dev
+        run: kubectl get svc -n book-dev  
