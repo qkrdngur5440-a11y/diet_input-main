@@ -83,38 +83,21 @@ Then open:
 
     http://localhost:8081
 
-Local self-hosted runner CI/CD
+Continuous integration and deployment
 
-This project includes `.github/workflows/local-ci-cd.yml` for a GitHub Actions
-self-hosted runner on your own computer.
+This repository uses GitHub Actions CI in `.github/workflows/ci.yml` for build and test.
+The `ci.yml` workflow runs on push to `main` and `feature/**`, and on pull requests targeting `main`.
 
-Required local tools:
+Deployment is handled by Argo CD, so CI builds and pushes Docker images for the services while Argo CD performs the deployment.
 
-- Java 17
-- Docker Desktop
-- Kubernetes enabled in Docker Desktop, Minikube, or another local cluster
-- kubectl
-- GitHub Actions self-hosted runner installed and running
+The CI workflow builds and verifies:
 
-Runner setup summary:
+- input service
+- analysis service
+- gateway service
+- eureka server
 
-1. In GitHub, open your repository.
-2. Go to `Settings > Actions > Runners`.
-3. Click `New self-hosted runner`.
-4. Choose Windows and follow the commands GitHub shows.
-5. Start the runner with `run.cmd`.
-
-When code is pushed to `main` or `feature/**`, or when the workflow is run manually,
-the local runner will:
-
-1. Build and test input, analysis, and gateway services.
-2. Build local Docker images: `diet_input:local`, `diet_analysis:local`, `diet_gateway:local`.
-3. Deploy `overlays/local` to the local Kubernetes cluster.
-4. Expose the gateway through NodePort `30101`.
-
-After deployment, open:
-
-    http://localhost:30101
+Images are pushed to Docker Hub and can be deployed by Argo CD from the image registry.
 
 Istio service mesh
 
