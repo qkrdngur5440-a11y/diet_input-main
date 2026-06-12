@@ -41,7 +41,7 @@ jobs:
         shell: powershell
         run: .\mvnw.cmd -f eureka\pom.xml clean verify --batch-mode
 
-      - name: Build local Docker images
+      - name: Build local Docker images  
         shell: powershell
         run: |
           docker build -t diet_input:local .
