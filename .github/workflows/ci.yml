@@ -70,4 +70,4 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/diet_gateway:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/diet_eureka:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/diet_eureka:latest
-  
+     
